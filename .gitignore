@@ -28,4 +28,4 @@
 *.app
 
 # ignore external dependencies
-./external
+/external
