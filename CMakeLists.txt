@@ -111,6 +111,11 @@ IF( BUILD_UNIT_TESTS )
 	FIND_PACKAGE( Threads )
 ENDIF( BUILD_UNIT_TESTS )
 
+# Doxygen
+OPTION( BUILD_DOXYGEN "Build unit tests." ON )
+if( BUILD_DOXYGEN )
+	ADD_SUBDIRECTORY(doc)
+endif( BUILD_DOXYGEN ) 
 
 #-----------------------------------------------------------------------------
 # Add Build Targets
