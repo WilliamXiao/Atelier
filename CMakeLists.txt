@@ -31,6 +31,8 @@ SET (APPLICATION_VENDOR_NAME "Atelier")
 SET (APPLICATION_VENDOR_URL "xx_Atelier.com")
 SET (APPLICATION_ID "${APPLICATION_VENDOR_ID}.${PROJECT_NAME}")
 
+ 
+ 
 #-----------------------------------------------------------------------------
 # Compiler settings
 #-----------------------------------------------------------------------------
@@ -94,9 +96,14 @@ set(Boost_USE_STATIC_LIBS NOT ${Boost_USE_STATIC_LIBS})
 
 find_package(Boost 1.52 COMPONENTS ${ART_BOOST_COMPONENTS} REQUIRED)
 IF (Boost_FOUND)
-    INCLUDE_DIRECTORIES(${BOOST_INCLUDE_DIR})
+    #INCLUDE_DIRECTORIES(${BOOST_INCLUDE_DIR})
     ADD_DEFINITIONS( "-DHAS_BOOST" )
 ENDIF()
+
+# Eigen
+set (ART_EIGEN_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/external/eigen_3_2_2)
+
+INCLUDE_DIRECTORIES(${BOOST_INCLUDE_DIR} ${ART_EIGEN_INCLUDE_DIR} )
 
 # Google Test
 # Allow unit tests to be disabled via command
@@ -108,7 +115,7 @@ IF( BUILD_UNIT_TESTS )
 	ENABLE_TESTING()
 	INCLUDE( external/CMakeLists.txt )
 	# Find the threading package for this machine.
-	FIND_PACKAGE( Threads )
+	#FIND_PACKAGE( Threads )
 ENDIF( BUILD_UNIT_TESTS )
 
 # Doxygen

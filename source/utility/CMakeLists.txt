@@ -22,10 +22,14 @@ INCLUDE_DIRECTORIES( ${INCLUDE_DIRS} )
 
 SET( INCLUDE_FILES
 	${ART_INCLUDE_DIR}/utility/Timer.h
+	${ART_INCLUDE_DIR}/utility/Ray.h
+	${ART_INCLUDE_DIR}/utility/common.h
+	${ART_INCLUDE_DIR}/utility/math/Vector.h
 )
 
 SET( SOURCE_FILES
 	Timer.cpp
+	Vector.cpp
 )
 
 # STATIC or SHARED

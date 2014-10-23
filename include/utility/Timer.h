@@ -1,8 +1,9 @@
-#ifndef ART_UTILITY_TIMER_H
-#define ART_UTILITY_TIMER_H
+#ifndef TIMER_H
+#define TIMER_H
 
-namespace ART {
-    namespace utility {
+#include <utility/common.h>
+
+ATELIER_UTILITY_BEGIN
 
 class Timer {
 public:
@@ -11,6 +12,6 @@ public:
     bool print();
     int add(int a, int b);
 };
-} // namespace utility
-} // namespace ART
+ATELIER_UTILITY_END
+
 #endif

@@ -23,6 +23,7 @@ INCLUDE_DIRECTORIES( ${INCLUDE_DIRS} )
 SET( INCLUDE_FILES
 	testAll.hpp
 	testTimer.hpp
+	testVector.hpp
 )
 
 SET( SOURCE_FILES

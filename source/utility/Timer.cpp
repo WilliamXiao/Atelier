@@ -2,8 +2,8 @@
 #include <utility/Timer.h>
 #include <stdio.h>
 
-using namespace ART;
-using namespace ART::utility;
+using namespace ATELIER;
+using namespace ATELIER::UTILITY;
 
 Timer::Timer() {
 	printf(" This is Timer construction. \n");
