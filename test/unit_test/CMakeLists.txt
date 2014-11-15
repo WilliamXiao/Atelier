@@ -30,6 +30,7 @@ SET( SOURCE_FILES
 	unit_test_main.cpp
 )
 
+LINK_DIRECTORIES(${CMAKE_LIBRARY_PATH})
 # Make a unit test holder for the Math library.
 IF( BUILD_UNIT_TESTS )
 	# Add the gmock include directories.

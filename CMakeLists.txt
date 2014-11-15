@@ -8,15 +8,15 @@
 #=============================================================================
 
 cmake_minimum_required(VERSION 2.8.4 FATAL_ERROR)
-if(POLICY CMP0025)
+IF(POLICY CMP0025)
   cmake_policy(SET CMP0025 NEW)
-endif()
+ENDIF()
 
 #-----------------------------------------------------------------------------
 # Project Properties
 #-----------------------------------------------------------------------------
-set(PROJECT_NAME "Atelier")
-project("${PROJECT_NAME}")
+SET(PROJECT_NAME "Atelier")
+PROJECT("${PROJECT_NAME}")
 
 SET (APPLICATION_NAME "${PROJECT_NAME}")
 SET (APPLICATION_CODENAME "${PROJECT_NAME}")
@@ -31,43 +31,46 @@ SET (APPLICATION_VENDOR_NAME "Atelier")
 SET (APPLICATION_VENDOR_URL "xx_Atelier.com")
 SET (APPLICATION_ID "${APPLICATION_VENDOR_ID}.${PROJECT_NAME}")
 
- 
- 
 #-----------------------------------------------------------------------------
 # Compiler settings
 #-----------------------------------------------------------------------------
 
 # Set default compile flags for GCC
-if(CMAKE_COMPILER_IS_GNUCXX)
-    message(STATUS "GCC detected, adding compile flags")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++98 -pedantic -Wall -Wextra")
-	set(CMAKE_C_FLAGS   " -Wall -Wextra" )
-else()
-	set(CMAKE_C_FLAGS   " -Wall" )
-	set(CMAKE_CXX_FLAGS " -Wall" )
-endif()
+IF(CMAKE_COMPILER_IS_GNUCXX)
+    MESSAGE(STATUS "GCC detected, adding compile flags")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++98 -pedantic -Wall -Wextra")
+	SET(CMAKE_C_FLAGS   " -Wall -Wextra" )
+ELSE()
+	#SET(CMAKE_C_FLAGS   " -Wall" )
+	#SET(CMAKE_CXX_FLAGS " -Wall" )
+ENDIF()
 
 # Set CMAKE_BUILD_TYPE to Release by default
-if ( NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
+IF ( NOT CMAKE_BUILD_TYPE)
+  SET(CMAKE_BUILD_TYPE "Debug" CACHE STRING
     "Choose the type of build, options are: Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
 	message(" test debug type")
-endif()
-# message("build type: ${CMAKE_BUILD_TYPE}")
+ENDIF()
+MESSAGE("build type: ${CMAKE_BUILD_TYPE}")
 
-if(MSVC)
-	set(CMAKE_CXX_FLAGS_DEBUG_INIT "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1")
-	set(CMAKE_CXX_FLAGS_MINSIZEREL_INIT     "/MT /O1 /Ob1 /D NDEBUG")
-	set(CMAKE_CXX_FLAGS_RELEASE_INIT        "/MT /O2 /Ob2 /D NDEBUG")
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT "/MT /Zi /O2 /Ob1 /D NDEBUG")
-endif()
+IF(MSVC)
+	SET(CMAKE_CXX_FLAGS_DEBUG_INIT "/D_DEBUG /MTD /ZI /OB0 /OD /RTC1")
+	SET(CMAKE_CXX_FLAGS_MINSIZEREL_INIT     "/MT /O1 /OB1 /D NDEBUG")
+	SET(CMAKE_CXX_FLAGS_RELEASE_INIT        "/MT /O2 /OB2 /D NDEBUG")
+	SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO_INIT "/MT /ZI /O2 /OB1 /D NDEBUG")
+ENDIF()
+
+#specific compiler flags
+IF((CMAKE_BUILD_TYPE MATCHES "Release") AND MSVC)
+	#ADD_DEFINITIONS(/arch:SSE2 /fp:fast /GS- /Gy)
+ENDIF((CMAKE_BUILD_TYPE MATCHES "Release") AND MSVC)
 
 #-----------------------------------------------------------------------------
 # # Search Paths
 #-----------------------------------------------------------------------------
 LIST (APPEND CMAKE_PREFIX_PATH "${PROJECT_SOURCE_DIR}")
 LIST (APPEND CMAKE_PREFIX_PATH "${PROJECT_SOURCE_DIR}/external")
-set (ART_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+SET (ART_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 INCLUDE_DIRECTORIES(${ART_INCLUDE_DIR})
 
 #-----------------------------------------------------------------------------
@@ -85,25 +88,26 @@ endif( MSVC )
 #-----------------------------------------------------------------------------
 
 # Boost
-set (BOOST_ROOT ${PROJECT_SOURCE_DIR}/external/boost_1_52/)
-SET (BOOST_LIBRARYDIR ${PROJECT_SOURCE_DIR}/external/boost_1_52/lib/x86_vc100/debug)
+SET (BOOST_LIBRARY_DIR ${PROJECT_SOURCE_DIR}/external/boost_1_52/lib/x86_vc100)
 SET (BOOST_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/external/boost_1_52/include)
-SET(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} ${BOOST_INCLUDE_DIR})
-SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ${BOOST_LIBRARYDIR})
+INCLUDE_DIRECTORIES(${BOOST_INCLUDE_DIR})
+MESSAGE("boos lib dir: ${BOOST_LIBRARY_DIR}")
 
-set(ART_BOOST_COMPONENTS system filesystem)
-set(Boost_USE_STATIC_LIBS NOT ${Boost_USE_STATIC_LIBS})
-
-find_package(Boost 1.52 COMPONENTS ${ART_BOOST_COMPONENTS} REQUIRED)
-IF (Boost_FOUND)
-    #INCLUDE_DIRECTORIES(${BOOST_INCLUDE_DIR})
-    ADD_DEFINITIONS( "-DHAS_BOOST" )
-ENDIF()
+SET(ART_BOOST_COMPONENTS system filesystem)
 
 # Eigen
-set (ART_EIGEN_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/external/eigen_3_2_2)
+SET (ART_EIGEN_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/external/eigen_3_2_2)
+INCLUDE_DIRECTORIES(${ART_EIGEN_INCLUDE_DIR} )
 
-INCLUDE_DIRECTORIES(${BOOST_INCLUDE_DIR} ${ART_EIGEN_INCLUDE_DIR} )
+# FreeImage
+SET(FREEIMAGE_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/external/FreeImage_3_13_1/include)
+SET(FREEIMAGE_LIBRARY_DIR ${PROJECT_SOURCE_DIR}/external/FreeImage_3_13_1/lib/x86_vc100)
+SET(FREEIMAGE_LIBRARY optimized FreeImage.lib debug FreeImaged.lib)
+
+# common actions
+SET(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} 
+	${BOOST_LIBRARY_DIR} 
+	${FREEIMAGE_LIBRARY_DIR})
 
 # Google Test
 # Allow unit tests to be disabled via command
@@ -120,9 +124,9 @@ ENDIF( BUILD_UNIT_TESTS )
 
 # Doxygen
 OPTION( BUILD_DOXYGEN "Build unit tests." ON )
-if( BUILD_DOXYGEN )
+IF( BUILD_DOXYGEN )
 	ADD_SUBDIRECTORY(doc)
-endif( BUILD_DOXYGEN ) 
+ENDIF( BUILD_DOXYGEN ) 
 
 #-----------------------------------------------------------------------------
 # Add Build Targets

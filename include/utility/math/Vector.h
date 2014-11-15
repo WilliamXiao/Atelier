@@ -49,7 +49,8 @@ public:
 
 	/// Assign a vector from MatrixBase, to friendly play with Eigen
     template <typename Derived> TVector &operator=(const Eigen::MatrixBase<Derived>& p) {
-		this->Base::operator=(p);
+		//this->Base::operator= (p);
+		this->Base::_set(p);
 		return *this;
     }
 };

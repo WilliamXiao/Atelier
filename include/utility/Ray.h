@@ -1,16 +1,12 @@
 /**
- * @Ray.h
- * @author  Xiao Jian <xiaoj-a@grandsoft.com.cn>
+ * @ Ray.h
+ * @author  William Xiao 2005-2014. All rights reserved.
  * @version 1.0
- *
- * @section LICENSE
- *
- * Copyright 1998-2014 Glodon Inc. All rights reserved.
  *
  * @section DESCRIPTION
  *
- * \brief Simple Ray data structure.
- * 
+ * \brief  Simple ray representation
+ *
  */
 
 #ifndef RAY_H
