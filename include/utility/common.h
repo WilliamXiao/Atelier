@@ -27,7 +27,8 @@
 
 /// Basic Includes
 #include <complex>      // std::complex, std::abs
-#include <Eigen/Core>   // Linear A
+#include <Eigen/Core>   // Matrix and Array classes, basic linear algebra , array manipulation
+#include <Eigen/Geometry> //Transform, Translation, Scaling, Rotation2D and 3D rotations (Quaternion, AngleAxis)
 
 ATELIER_UTILITY_BEGIN
 

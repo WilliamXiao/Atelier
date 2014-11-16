@@ -62,7 +62,7 @@ ENDIF()
 
 #specific compiler flags
 IF((CMAKE_BUILD_TYPE MATCHES "Release") AND MSVC)
-	#ADD_DEFINITIONS(/arch:SSE2 /fp:fast /GS- /Gy)
+	ADD_DEFINITIONS(/arch:SSE2 /fp:fast /GS- /Gy)
 ENDIF((CMAKE_BUILD_TYPE MATCHES "Release") AND MSVC)
 
 #-----------------------------------------------------------------------------

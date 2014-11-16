@@ -24,6 +24,7 @@ SET( INCLUDE_FILES
 	testAll.hpp
 	testTimer.hpp
 	testVector.hpp
+	testTransform.hpp
 )
 
 SET( SOURCE_FILES

@@ -21,10 +21,11 @@ message("current path: ${INCLUDE_DIRS}")
 INCLUDE_DIRECTORIES( ${INCLUDE_DIRS} )
 
 SET( INCLUDE_FILES
+	${ART_INCLUDE_DIR}/utility/common.h
 	${ART_INCLUDE_DIR}/utility/Timer.h
 	${ART_INCLUDE_DIR}/utility/Ray.h
-	${ART_INCLUDE_DIR}/utility/common.h
 	${ART_INCLUDE_DIR}/utility/math/Vector.h
+	${ART_INCLUDE_DIR}/utility/math/Transform.h
 )
 
 SET( SOURCE_FILES
